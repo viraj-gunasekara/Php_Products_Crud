@@ -21,54 +21,48 @@ if (isset($_GET['edit'])) {
 
 $products = ProductController::list();
 ?>
-<div class="max-w-4xl mx-auto py-8 px-4">
-    <h1 class="text-3xl font-bold mb-8 text-gray-800">Manage Products</h1>
-    <form method="post" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 bg-white p-6 rounded-xl shadow">
+<div class="max-w-6xl mx-auto py-8 px-4">
+    <h1 class="text-3xl font-bold mb-8 text-gray-800 dark:text-white">Manage Products</h1>
+    <form method="post" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 bg-white dark:bg-gray-800 p-6 rounded-xl shadow dark:shadow-gray-900">
         <?php if ($editProduct): ?>
             <input type="hidden" name="id" value="<?php echo $editProduct['id']; ?>">
             <div class="relative">
-                <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($editProduct['name']); ?>" required class="peer w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-transparent">
-                <label for="name" class="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-blue-600 peer-focus:text-xs bg-white px-1">Name</label>
-                <span class="absolute right-3 top-2 text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 01-8 0" /></svg></span>
+                <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($editProduct['name']); ?>" required class="peer w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 placeholder-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+                <label for="name" class="absolute left-3 top-2 text-gray-500 dark:text-gray-300 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:text-xs bg-white dark:bg-gray-900 px-1">Name</label>
             </div>
             <div class="relative">
-                <input type="number" step="0.01" name="price" id="price" value="<?php echo $editProduct['price']; ?>" required class="peer w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-transparent">
-                <label for="price" class="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-blue-600 peer-focus:text-xs bg-white px-1">Price</label>
-                <span class="absolute right-3 top-2 text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" /></svg></span>
+                <input type="number" step="0.01" name="price" id="price" value="<?php echo $editProduct['price']; ?>" required class="peer w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 placeholder-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+                <label for="price" class="absolute left-3 top-2 text-gray-500 dark:text-gray-300 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:text-xs bg-white dark:bg-gray-900 px-1">Price</label>
             </div>
             <div class="relative">
-                <input type="text" name="description" id="description" value="<?php echo htmlspecialchars($editProduct['description']); ?>" required class="peer w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-transparent">
-                <label for="description" class="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-blue-600 peer-focus:text-xs bg-white px-1">Description</label>
-                <span class="absolute right-3 top-2 text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg></span>
+                <input type="text" name="description" id="description" value="<?php echo htmlspecialchars($editProduct['description']); ?>" required class="peer w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 placeholder-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+                <label for="description" class="absolute left-3 top-2 text-gray-500 dark:text-gray-300 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:text-xs bg-white dark:bg-gray-900 px-1">Description</label>
             </div>
             <div class="col-span-1 md:col-span-3 flex gap-4 mt-4">
-                <button type="submit" name="update" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Update</button>
-                <a href="crud.php" class="bg-gray-400 text-white px-6 py-2 rounded-lg hover:bg-gray-500 transition">Cancel</a>
+                <button type="submit" name="update" class="bg-blue-600 dark:bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-900 transition">Update</button>
+                <a href="crud.php" class="bg-gray-400 dark:bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-800 transition">Cancel</a>
             </div>
         <?php else: ?>
             <div class="relative">
-                <input type="text" name="name" id="name" required class="peer w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-transparent">
-                <label for="name" class="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-blue-600 peer-focus:text-xs bg-white px-1">Name</label>
-                <span class="absolute right-3 top-2 text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 01-8 0" /></svg></span>
+                <input type="text" name="name" id="name" required class="peer w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 placeholder-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+                <label for="name" class="absolute left-3 top-2 text-gray-500 dark:text-gray-300 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:text-xs bg-white dark:bg-gray-900 px-1">Name</label>
             </div>
             <div class="relative">
-                <input type="number" step="0.01" name="price" id="price" required class="peer w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-transparent">
-                <label for="price" class="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-blue-600 peer-focus:text-xs bg-white px-1">Price</label>
-                <span class="absolute right-3 top-2 text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" /></svg></span>
+                <input type="number" step="0.01" name="price" id="price" required class="peer w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 placeholder-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+                <label for="price" class="absolute left-3 top-2 text-gray-500 dark:text-gray-300 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:text-xs bg-white dark:bg-gray-900 px-1">Price</label>
             </div>
             <div class="relative">
-                <input type="text" name="description" id="description" required class="peer w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-transparent">
-                <label for="description" class="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-4 peer-focus:text-blue-600 peer-focus:text-xs bg-white px-1">Description</label>
-                <span class="absolute right-3 top-2 text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg></span>
+                <input type="text" name="description" id="description" required class="peer w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 placeholder-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+                <label for="description" class="absolute left-3 top-2 text-gray-500 dark:text-gray-300 text-sm transition-all peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:text-xs bg-white dark:bg-gray-900 px-1">Description</label>
             </div>
             <div class="col-span-1 md:col-span-3 flex gap-4 mt-4">
-                <button type="submit" name="add" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Add Product</button>
+                <button type="submit" name="add" class="bg-green-600 dark:bg-green-800 text-white px-6 py-2 rounded-lg hover:bg-green-700 dark:hover:bg-green-900 transition">Add Product</button>
             </div>
         <?php endif; ?>
     </form>
     <div class="overflow-x-auto">
-        <table class="w-full border rounded-lg overflow-hidden shadow">
-            <thead class="bg-gray-100">
+        <table class="w-full border rounded-lg overflow-hidden shadow dark:bg-gray-800 dark:text-white">
+            <thead class="bg-gray-100 dark:bg-gray-700">
                 <tr>
                     <th class="px-4 py-2">ID</th>
                     <th class="px-4 py-2">Name</th>
@@ -79,7 +73,7 @@ $products = ProductController::list();
             </thead>
             <tbody>
                 <?php foreach ($products as $product): ?>
-                <tr class="hover:bg-gray-50 transition">
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-900 transition">
                     <td class="px-4 py-2"><?php echo $product['id']; ?></td>
                     <td class="px-4 py-2"><?php echo htmlspecialchars($product['name']); ?></td>
                     <td class="px-4 py-2">$<?php echo number_format($product['price'], 2); ?></td>
