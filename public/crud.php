@@ -1,15 +1,47 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/../src/Controllers/ProductController.php';
 include_once __DIR__ . '/../src/Views/header.php';
+// for debug
+// echo '<pre>'; print_r($_SESSION); echo '</pre>';
+
+// Toast message logic
+$toastMsg = '';
+$toastType = 'success';
+if (isset($_SESSION['toast'])) {
+    $toastMsg = $_SESSION['toast']['message'];
+    $toastType = $_SESSION['toast']['type'];
+    unset($_SESSION['toast']);
+}
 
 // Handle CRUD actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add'])) {
-        ProductController::create($_POST['name'], $_POST['price'], $_POST['description']);
+        if (ProductController::create($_POST['name'], $_POST['price'], $_POST['description'])) {
+            $_SESSION['toast'] = ['message' => 'Product added successfully!', 'type' => 'success'];
+        } else {
+            $_SESSION['toast'] = ['message' => 'Failed to add product.', 'type' => 'error'];
+        }
+        header('Location: crud.php');
+        exit;
     } elseif (isset($_POST['update'])) {
-        ProductController::update($_POST['id'], $_POST['name'], $_POST['price'], $_POST['description']);
+        if (ProductController::update($_POST['id'], $_POST['name'], $_POST['price'], $_POST['description'])) {
+            $_SESSION['toast'] = ['message' => 'Product updated successfully!', 'type' => 'success'];
+        } else {
+            $_SESSION['toast'] = ['message' => 'Failed to update product.', 'type' => 'error'];
+        }
+        header('Location: crud.php');
+        exit;
     } elseif (isset($_POST['delete'])) {
-        ProductController::delete($_POST['id']);
+        if (ProductController::delete($_POST['id'])) {
+            $_SESSION['toast'] = ['message' => 'Product deleted successfully!', 'type' => 'success'];
+        } else {
+            $_SESSION['toast'] = ['message' => 'Failed to delete product.', 'type' => 'error'];
+        }
+        header('Location: crud.php');
+        exit;
     }
 }
 
@@ -92,3 +124,28 @@ $products = ProductController::list();
     </div>
 </div>
 <?php include_once __DIR__ . '/../src/Views/footer.php'; ?>
+
+<?php if ($toastMsg): ?>
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        console.log('Triggering toast:', "<?php echo addslashes($toastMsg); ?>");
+        showToast('<?php echo addslashes($toastMsg); ?>', '<?php echo $toastType; ?>');
+    });
+</script>
+<?php endif; ?>
+
+<script src="/Php_Products_Crud/public/toast.js"></script>
+<script>
+    const gridBtn = document.getElementById('gridBtn');
+    const listBtn = document.getElementById('listBtn');
+    const productGrid = document.getElementById('productGrid');
+    const productList = document.getElementById('productList');
+    gridBtn.addEventListener('click', () => {
+        productGrid.classList.remove('hidden');
+        productList.classList.add('hidden');
+    });
+    listBtn.addEventListener('click', () => {
+        productGrid.classList.add('hidden');
+        productList.classList.remove('hidden');
+    });
+</script>

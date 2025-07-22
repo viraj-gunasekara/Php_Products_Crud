@@ -30,5 +30,4 @@
             </div>
         </nav>
     </header>
-    <main class="min-h-[calc(100vh-112px)] bg-white dark:bg-gray-900 transition-colors duration-300"> <!-- Adjust for header/footer height -->
-    <script src="/Php_Products_Crud/public/theme.js"></script>
+    <main class="min-h-[calc(100vh-112px)] bg-white dark:bg-gray-900 transition-colors duration-300"> 

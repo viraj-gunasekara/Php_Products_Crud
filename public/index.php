@@ -2,8 +2,19 @@
 require_once __DIR__ . '/../src/Controllers/ProductController.php';
 include_once __DIR__ . '/../src/Views/header.php';
 
+$toastMsg = '';
+$toastType = 'success';
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $products = ProductController::list($search);
+if (isset($_GET['search'])) {
+    if ($search && count($products) > 0) {
+        $toastMsg = 'Found ' . count($products) . ' product(s) for "' . htmlspecialchars($search) . '"';
+        $toastType = 'success';
+    } elseif ($search) {
+        $toastMsg = 'No products found for "' . htmlspecialchars($search) . '"';
+        $toastType = 'error';
+    }
+}
 ?>
 <div class="max-w-6xl mx-auto py-8 px-4">
     <h1 class="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Product List</h1>
@@ -66,5 +77,10 @@ $products = ProductController::list($search);
         productGrid.classList.add('hidden');
         productList.classList.remove('hidden');
     });
+    <?php if ($toastMsg): ?>
+    window.addEventListener('DOMContentLoaded', function() {
+        showToast('<?php echo addslashes($toastMsg); ?>', '<?php echo $toastType; ?>');
+    });
+    <?php endif; ?>
 </script>
 <?php include_once __DIR__ . '/../src/Views/footer.php'; ?>
