@@ -1,0 +1,19 @@
+#Run Project=>
+*http://localhost/Php_Products_Crud/public/index.php
+
+#MySQL=>
+*Create a MySQL database with name 'products_crud'.
+*Then create a table named products in your products_crud database.
+*Based on Product.php model, the table should have 4 columns:
+id (primary key, auto-increment)
+name (string)
+price (decimal)
+description (text)
+*Run this in MySQL client to make columns.
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    description TEXT
+);
+
